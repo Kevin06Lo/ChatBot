@@ -1,5 +1,12 @@
 {
-    "greetings": ["hello", "hi", "hey"],
-    "farewells": ["bye", "goodbye", "see you"],
-    "thanks": ["thank you", "thanks"]
+    "hi|hello|hey": "Hello there! How can I assist you today?",
+    "how are you|how's it going": "Im doing good, how about you?",
+    "what is you name": "I am Drax, your personal assistant. What is you name?",
+    "my name is (.*)": "Nice to meet you, {1}!",
+    "goodbye|bye|see you": "Bye! Have a great day",
+    "time|clock|hour": "The current time is {time}",
+    "date|day|today": "Today's date is {date}",
+    "thank you|thanks": "You're welcome! If you have any more questions, feel free to ask.",
+    "help|assist|support": "Sure! How can I help you?",
+    "joke|funny|make me laugh": "Why don't scientists trust atoms? Because they make up everything!"
 }
