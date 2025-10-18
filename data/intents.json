@@ -1,12 +1,70 @@
 {
-    "hi|hello|hey": "Hello there! How can I assist you today?",
-    "how are you|how's it going": "Im doing good, how about you?",
-    "what is you name": "I am Drax, your personal assistant. What is you name?",
-    "my name is (.*)": "Nice to meet you, {1}!",
-    "goodbye|bye|see you": "Bye! Have a great day",
-    "time|clock|hour": "The current time is {time}",
-    "date|day|today": "Today's date is {date}",
-    "thank you|thanks": "You're welcome! If you have any more questions, feel free to ask.",
-    "help|assist|support": "Sure! How can I help you?",
-    "joke|funny|make me laugh": "Why don't scientists trust atoms? Because they make up everything!"
+    "intents":[
+        {
+            "tag": "greeting",
+            "patterns": ["hi", "hello", "hey", "good morning", "yoo"],
+            "responses":[
+                "Hello! How can I assist you today?",
+                "Hi there! What can I do for you?",
+                "Hey! Need any help?",
+                "Hello there!"
+            ]
+        },
+        {
+            "tag": "goodbye",
+            "patterns": ["bye", "see you", "goodbye", "later"],
+            "responses":[
+                "Goodbye! Have a great day!",
+                "See you later! Take care!",
+                "Bye! Come back soon!",
+                "Farewell! Stay safe!"
+            ]
+        },
+        {
+            "tag":"thanks",
+            "patterns":["thanks", "thank you", "much appreciated", "thanks a lot"],
+            "responses":[
+                "You are welcome",
+                "Absolutely!",
+                "No problemo",
+                "Anytime!",
+                "My pleasure!"
+            ]
+        },
+        {
+            "tag": "help",
+            "patterns": ["Help me", "I need help", "Can you help?"],
+            "responses":[
+                "Sure, what can I do for you?",
+                "I'm here to help!",
+                "Drax to the rescue!"
+            ]
+        },
+        {
+            "tag": "name_query",
+            "patterns": ["What is your name?", "Who are you?", "Tell me your name"],
+            "responses":[
+                "I'm {name}, your chatbot friend",
+                "You can call me {name}"
+            ]
+        },
+        {
+            "tag": "time_query",
+            "patterns": ["What time is it?", "Tell me the time"],
+            "responses":[
+                "It's currently {time}",
+                "It's {time}",
+                "{time}"
+            ]
+        },
+        {
+            "tag": "date_query",
+            "patterns": ["What day is it?", "What's the date", "Tell me the date"],
+            "responses": [
+                "Today is {date}",
+                "It's {date} today",
+                "{date}"
+            ]
+        }
+    ]
 }
