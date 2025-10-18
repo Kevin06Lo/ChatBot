@@ -21,6 +21,16 @@
             ]
         },
         {
+            "tag": "how_are_you",
+            "patterns": ["How are you?", "How is it going?", "How you doing?"],
+            "responses": [
+                "I'm good, thank you! How about you?",
+                "I'm good how about yourself?",
+                "Just chilling, how about you?",
+                "Doing well, thanks. And you?"
+            ]
+        },
+        {
             "tag":"thanks",
             "patterns":["thanks", "thank you", "much appreciated", "thanks a lot"],
             "responses":[
@@ -64,6 +74,32 @@
                 "Today is {date}",
                 "It's {date} today",
                 "{date}"
+            ]
+        },
+        {
+            "tag": "creator",
+            "patterns": ["Who created you?", "Where do you come from?"],
+            "responses": [
+                "A great coder built me!",
+                "My best friend, a human"
+            ]
+        },
+        {
+            "tag": "joke",
+            "patterns":["Tell me a joke", "Say a joke", "I need a joke"],
+            "responses":[
+                "Why don't scientists trust atoms? Because they make up everything!",
+                "Why did the scarecrow win an award? Because he was outstanding in his field!",
+                "Why don't programmers like nature? It has too many bugs."
+            ]    
+        },
+        {
+            "tag": "compliment",
+            "patterns":["You are funny", "You are awesome", "You are great", "You the goat", "You are smart"],
+            "responses": [
+                "Thank you",
+                "Right back at you!",
+                "I'm just trying to give my best!"
             ]
         }
     ]
