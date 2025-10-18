@@ -14,8 +14,8 @@
             "tag": "goodbye",
             "patterns": ["bye", "see you", "goodbye", "later"],
             "responses":[
-                "Goodbye! Have a great day!",
-                "See you later! Take care!",
+                "Goodbye! Have a great day {user_name}!",
+                "See you later {user_name} Take care!",
                 "Bye! Come back soon!",
                 "Farewell! Stay safe!"
             ]
@@ -54,8 +54,8 @@
             "tag": "name_query",
             "patterns": ["What is your name?", "Who are you?", "Tell me your name"],
             "responses":[
-                "I'm {name}, your chatbot friend",
-                "You can call me {name}"
+                "I'm {name}, your chatbot friend.",
+                "You can call me {name}."
             ]
         },
         {
@@ -98,8 +98,35 @@
             "patterns":["You are funny", "You are awesome", "You are great", "You the goat", "You are smart"],
             "responses": [
                 "Thank you",
-                "Right back at you!",
+                "Right back at you, {user_name}!",
                 "I'm just trying to give my best!"
+            ]
+        },
+        {
+            "tag": "introduction",
+            "patterns": ["my name is (.*)", "I'm (.*)", "I am (.*)"],
+            "responses": [
+                "Nice to meet you, {user_name} what can I do for you today?",
+                "Hey {user_name}, how are you today?",
+                "Great to meet you, {user_name} do you need help with anything?"
+            ]
+        },
+        {
+            "tag": "feeling_positive",
+            "patterns": ["i'm fine", "i'm good", "I'm okay", "doing great", "not bad", "fine", "good"],
+            "responses": [
+                "Glad to hear that!",
+                "Awesome 😄",
+                "That's great to know!"
+            ]
+        },
+        {
+            "tag": "feeling_negative",
+            "patterns": ["I'm sad", "not good", "I'm tired", "feeling bad", "I feel down", "bad"],
+            "responses": [
+                "I'm sorry to hear that 😔 Want to talk about it?",
+                "I'm here if you need to vent.",
+                "That sounds tough. Take it easy, okay?"
             ]
         }
     ]
