@@ -81,7 +81,7 @@ class ChatBot:
                     response = response.replace("{name}", self.name)
 
                     if self.user_name:
-                        reponse = response.replace("{user_name}", self.user_name)
+                        response = response.replace("{user_name}", self.user_name)
 
                     self.remember("bot", response)
                     return response

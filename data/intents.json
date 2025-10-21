@@ -24,10 +24,10 @@
             "tag": "how_are_you",
             "patterns": ["How are you?", "How is it going?", "How you doing?"],
             "responses": [
-                "I'm good, thank you! How about you?",
+                "I'm good, thank you! How about you {user_name}?",
                 "I'm good how about yourself?",
-                "Just chilling, how about you?",
-                "Doing well, thanks. And you?"
+                "Just chilling, how about you {user_name}?",
+                "Doing well, thanks. And you {user_name}?"
             ]
         },
         {
@@ -104,7 +104,7 @@
         },
         {
             "tag": "introduction",
-            "patterns": ["my name is (.*)", "I'm (.*)", "I am (.*)"],
+            "patterns": ["my name is (.*)", "I'm (?!fine|good|okay|great|not bad)(.*)", "I am (?!fine|good|okay|great|not bad)(.*)"],
             "responses": [
                 "Nice to meet you, {user_name} what can I do for you today?",
                 "Hey {user_name}, how are you today?",
