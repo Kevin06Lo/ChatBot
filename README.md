@@ -28,6 +28,8 @@ ChatBot/
 │ ├── chatbot.py # ChatBot class definition
 │ └── main.py # Entry point logic for the chatbot
 │
+│── venv/ #Virtual Environment foler (Created automatically once you create the environment)
+│
 ├── run.py # Script to start the chatbot
 ├── requirements.txt # Dependencies
 ├── .gitignore # Files and folders ignored by Git
