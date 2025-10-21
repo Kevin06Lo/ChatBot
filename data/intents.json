@@ -104,7 +104,11 @@
         },
         {
             "tag": "introduction",
-            "patterns": ["my name is (.*)", "I'm (?!fine|good|okay|great|not bad)(.*)", "I am (?!fine|good|okay|great|not bad)(.*)"],
+            "patterns": [
+                "my name is (.*)", 
+                "I'm (?!fine|good|okay|great|not bad|sad|not good|tired)(.*)", 
+                "I am (?!fine|good|okay|great|not bad)(.*)"
+            ],
             "responses": [
                 "Nice to meet you, {user_name} what can I do for you today?",
                 "Hey {user_name}, how are you today?",
