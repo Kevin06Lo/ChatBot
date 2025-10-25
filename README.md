@@ -41,7 +41,7 @@ ChatBot/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/<your-username>/ChatBot.git
+   git clone https://github.com/Kevin06Lo/ChatBot.git
    cd ChatBot
 2. **Create Virtual environment**
     ```bash
