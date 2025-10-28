@@ -76,8 +76,8 @@ class ChatBot:
             for pattern in intent["patterns"]:
                 if re.search(pattern, user_input, re.IGNORECASE):
                     response = random.choice(intent["responses"])
-                    response = response.replace("{time}", datetime.now().strftime("%H:%M"))
-                    response = response.replace("{date}", datetime.now().strftime("%Y-%m-%d"))
+                    response = response.replace("{time}", datetime.now().strftime("%I:%M %p"))
+                    response = response.replace("{date}", datetime.now().strftime("%A, %B %d, %Y"))
                     response = response.replace("{name}", self.name)
 
                     if self.user_name:
