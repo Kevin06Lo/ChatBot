@@ -1,4 +1,5 @@
 from src.chatbot import ChatBot
+from src.chatbot import type_effect
 
 def run_chat():
     bot = ChatBot("Drax")
@@ -12,4 +13,7 @@ def run_chat():
         if(user_input.lower() == "exit"):
             print("Drax out.")
             break
-        print(f"Drax: {bot.get_response(user_input)}\n")
+        response = bot.get_response(user_input)
+        print("Drax: ", end="")
+        type_effect(response)
+        print()

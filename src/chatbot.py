@@ -2,7 +2,16 @@ import json
 import re
 import os
 import random
+import sys
+import time
 from datetime import datetime
+
+def type_effect(text):
+    for char in text:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(0.03)
+    print()
 
 class ChatBot:
     def __init__(self, name="PyBot"):
