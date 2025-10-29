@@ -1,9 +1,7 @@
-import json
-import re
-import os
-import random
-import sys
-import time
+import json, re, os, sys
+import random, time
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
 from datetime import datetime
 
 def type_effect(text):
@@ -19,6 +17,26 @@ class ChatBot:
         self.user_name = self.load_memory().get("user_name", None)
         self.intents = self.load_intents()
         self.memory = []
+
+        #NLP model initialization
+        self.vectorizer = CountVectorizer()
+        self.model = MultinomialNB()
+        self.train_model()
+
+    def train_model(self):
+        patterns = []
+        tags = []
+        for intenst in self.intents:
+            for pattern in intenst["patterns"]:
+                patterns.append(pattern.lower())
+                tags.append(intenst["tag"])
+        X = self.vectorizer.fit_transform(patterns)
+        self.model.fit(X, tags)
+
+    def predict_intent(self, user_input):
+        X = self.vectorizer.transform([user_input.lower()])
+        predicted_tag = self.model.predict(X)[0]
+        return predicted_tag    
 
     def load_intents(self):
         base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -80,20 +98,22 @@ class ChatBot:
             response = "Python of course!"
             self.remember("bot", response)
             return response
+        
+        #Use NLP to predict best intent
+        predicted_tag = self.predict_intent(user_input)
+        intent = next((i for i in self.intents if i["tag"] == predicted_tag), None)
 
-        for intent in self.intents:
-            for pattern in intent["patterns"]:
-                if re.search(pattern, user_input, re.IGNORECASE):
-                    response = random.choice(intent["responses"])
-                    response = response.replace("{time}", datetime.now().strftime("%I:%M %p"))
-                    response = response.replace("{date}", datetime.now().strftime("%A, %B %d, %Y"))
-                    response = response.replace("{name}", self.name)
+        if intent:
+            response = random.choice(intent["responses"])
+            response = response.replace("{time}", datetime.now().strftime("%I:%M %p"))
+            response = response.replace("{date}", datetime.now().strftime("%A, %B %d, %Y"))
+            response = response.replace("{name}", self.name)
 
-                    if self.user_name:
-                        response = response.replace("{user_name}", self.user_name)
+            if self.user_name:
+                response = response.replace("{user_name}", self.user_name)
 
-                    self.remember("bot", response)
-                    return response
+            self.remember("bot", response)
+            return response
             
         reponse = "I'm not sure how to respond to that."
         self.remember("bot", response)
