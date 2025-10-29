@@ -1,15 +1,8 @@
-import json, re, os, sys
-import random, time
+import json, re, os, random
+from datetime import datetime
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
-from datetime import datetime
-
-def type_effect(text):
-    for char in text:
-        sys.stdout.write(char)
-        sys.stdout.flush()
-        time.sleep(0.03)
-    print()
+from nltk.tokenize import word_tokenize
 
 class ChatBot:
     def __init__(self, name="PyBot"):
@@ -19,24 +12,7 @@ class ChatBot:
         self.memory = []
 
         #NLP model initialization
-        self.vectorizer = CountVectorizer()
-        self.model = MultinomialNB()
-        self.train_model()
-
-    def train_model(self):
-        patterns = []
-        tags = []
-        for intenst in self.intents:
-            for pattern in intenst["patterns"]:
-                patterns.append(pattern.lower())
-                tags.append(intenst["tag"])
-        X = self.vectorizer.fit_transform(patterns)
-        self.model.fit(X, tags)
-
-    def predict_intent(self, user_input):
-        X = self.vectorizer.transform([user_input.lower()])
-        predicted_tag = self.model.predict(X)[0]
-        return predicted_tag    
+        self.vectorizer, self.model = self.train_nlp_model() 
 
     def load_intents(self):
         base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -63,6 +39,27 @@ class ChatBot:
         memory_path = os.path.join(os.path.dirname(__file__), "..", "data", "memory.json")
         with open(memory_path, "w", encoding="utf-8") as file:
             json.dump({"user_name": self.user_name}, file)
+
+    def train_nlp_model(self):
+        patterns = []
+        tags = []
+
+        for intent in self.intents:
+            for pattern in intent["patterns"]:
+                patterns.append(pattern)
+                tags.append(intent["tag"])
+        
+        vectorizer = CountVectorizer(tokenizer=word_tokenize, lowercase=True, token_pattern=None)
+        X = vectorizer.fit_transform(patterns)
+        model = MultinomialNB()
+        model.fit(X, tags)
+
+        return vectorizer, model
+    
+    def predict_intent(self, text):
+        X_test = self.vectorizer.transform([text.lower()])
+        tag = self.model.predict(X_test)[0]
+        return tag
 
 
     def remember(self, role, message):
@@ -100,21 +97,20 @@ class ChatBot:
             return response
         
         #Use NLP to predict best intent
-        predicted_tag = self.predict_intent(user_input)
-        intent = next((i for i in self.intents if i["tag"] == predicted_tag), None)
+        intent_tag = self.predict_intent(user_input)
+        for intent in self.intents:
+            if intent["tag"] == intent_tag:
+                response = random.choice(intent["responses"])
+                response = response.replace("{time}", datetime.now().strftime("%I:%M %p"))
+                response = response.replace("{date}", datetime.now().strftime("%A, %B %d, %Y"))
+                response = response.replace("{name}", self.name)
 
-        if intent:
-            response = random.choice(intent["responses"])
-            response = response.replace("{time}", datetime.now().strftime("%I:%M %p"))
-            response = response.replace("{date}", datetime.now().strftime("%A, %B %d, %Y"))
-            response = response.replace("{name}", self.name)
+                if self.user_name:
+                    response = response.replace("{user_name}", self.user_name)
+                
+                self.remember("bot", response)
+                return response
 
-            if self.user_name:
-                response = response.replace("{user_name}", self.user_name)
-
-            self.remember("bot", response)
-            return response
-            
-        reponse = "I'm not sure how to respond to that."
+        response = "I'm not sure how to respond to that."
         self.remember("bot", response)
-        return reponse
+        return response
