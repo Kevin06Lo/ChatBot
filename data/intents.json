@@ -43,11 +43,12 @@
         },
         {
             "tag": "help",
-            "patterns": ["Help me", "I need help", "Can you help?"],
+            "patterns": ["Help me", "Help me out", "I need help", "Can you help?", "I'm stuck", "Need some guidance", "Can you please assist?"],
             "responses":[
                 "Sure, what can I do for you?",
                 "I'm here to help!",
-                "Drax to the rescue!"
+                "Drax to the rescue!",
+                "How can I assist you today?"
             ]
         },
         {
@@ -55,7 +56,8 @@
             "patterns": ["What is your name?", "Who are you?", "Tell me your name"],
             "responses":[
                 "I'm {name}, your chatbot friend.",
-                "You can call me {name}."
+                "You can call me {name}.",
+                "My name is {name}!!"
             ]
         },
         {
@@ -72,13 +74,13 @@
             "patterns": ["What day is it?", "What's the date", "Tell me the date"],
             "responses": [
                 "Today is {date}",
-                "It's {date} today",
+                "It's {date}",
                 "{date}"
             ]
         },
         {
             "tag": "creator",
-            "patterns": ["Who created you?", "Where do you come from?"],
+            "patterns": ["Who created you?", "Where do you come from?", "Who made you?"],
             "responses": [
                 "A great coder built me!",
                 "My best friend, a human"
