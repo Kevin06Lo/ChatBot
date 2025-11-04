@@ -2,11 +2,11 @@
     "intents":[
         {
             "tag": "greeting",
-            "patterns": ["hi", "hello", "hey", "good morning", "yoo"],
+            "patterns": ["hi", "hello", "hey", "good morning", "yoo", "what's up", "sup", "howdy", "how is it going?"],
             "responses":[
-                "Hello! How can I assist you today?",
+                "Hello {user_name}! How can I assist you today?",
                 "Hi there! What can I do for you?",
-                "Hey! Need any help?",
+                "Hey {user_name}! Need any help?",
                 "Hello there!"
             ]
         },
@@ -22,7 +22,8 @@
         },
         {
             "tag": "how_are_you",
-            "patterns": ["How are you?", "How is it going?", "How you doing?"],
+            "patterns": ["How are you?", "How is it going?", "How you doing?", "How you feeling?", "how are you doing?",
+                        "What's the word?", "How have you been?"],
             "responses": [
                 "I'm good, thank you! How about you {user_name}?",
                 "I'm good how about yourself?",
@@ -32,13 +33,14 @@
         },
         {
             "tag":"thanks",
-            "patterns":["thanks", "thank you", "much appreciated", "thanks a lot"],
+            "patterns":["thanks", "thank you", "much appreciated", "thanks a lot", "appreacite it"],
             "responses":[
                 "You are welcome",
                 "Absolutely!",
                 "No problemo",
                 "Anytime!",
-                "My pleasure!"
+                "My pleasure!",
+                "You got it."
             ]
         },
         {
@@ -62,7 +64,7 @@
         },
         {
             "tag": "time_query",
-            "patterns": ["What time is it?", "Tell me the time"],
+            "patterns": ["What time is it?", "Tell me the time", "time", "What's the hour?"],
             "responses":[
                 "It's currently {time}",
                 "It's {time}",
@@ -88,11 +90,12 @@
         },
         {
             "tag": "joke",
-            "patterns":["Tell me a joke", "Say a joke", "I need a joke"],
+            "patterns":["Tell me a joke", "Say a joke", "I need a joke", "I need to laugh"],
             "responses":[
                 "Why don't scientists trust atoms? Because they make up everything!",
                 "Why did the scarecrow win an award? Because he was outstanding in his field!",
-                "Why don't programmers like nature? It has too many bugs."
+                "Why don't programmers like nature? It has too many bugs.",
+                "Why do we tell actors to 'break a leg?' Because every play has a cast."
             ]    
         },
         {
@@ -133,6 +136,28 @@
                 "I'm sorry to hear that 😔 Want to talk about it?",
                 "I'm here if you need to vent.",
                 "That sounds tough. Take it easy, okay?"
+            ]
+        },
+        {
+            "tag": "weather_query",
+            "patterns": ["How's the weather today?", "Tell me the weather", "Is it cold outside?",
+            "What's the weather like?"],
+            "responses": [
+                "I'm not sure about the weather right now. Maybe check a weather app?",
+                "I can't provide weather updates, but I hope it's nice out!",
+                "Weather info is not in my database, sorry!",
+                "Hopefully it's a beautiful day!",
+                "The perfect weather to do something fun!"
+            ] 
+        },
+        {
+            "tag": "akcnowledgement",
+            "patterns": ["okay", "ok", "I see", "alright", "got it", "sweet"],
+            "responses":[
+                "Great!",
+                "Alright!",
+                "Understood!",
+                "Cool!"
             ]
         }
     ]
