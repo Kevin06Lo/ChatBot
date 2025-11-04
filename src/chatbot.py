@@ -1,6 +1,6 @@
 import json, re, os, random
 from datetime import datetime
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from nltk.tokenize import word_tokenize
 
@@ -49,7 +49,7 @@ class ChatBot:
                 patterns.append(pattern)
                 tags.append(intent["tag"])
         
-        vectorizer = CountVectorizer(tokenizer=word_tokenize, lowercase=True, token_pattern=None)
+        vectorizer = TfidfVectorizer(tokenizer=word_tokenize, lowercase=True, token_pattern=None)
         X = vectorizer.fit_transform(patterns)
         model = MultinomialNB()
         model.fit(X, tags)
@@ -58,8 +58,11 @@ class ChatBot:
     
     def predict_intent(self, text):
         X_test = self.vectorizer.transform([text.lower()])
-        tag = self.model.predict(X_test)[0]
-        return tag
+        probs = self.model.predict_proba(X_test)[0]
+        best_index = probs.argmax()
+        confidence = probs[best_index]
+        tag = self.model.classes_[best_index]
+        return tag, confidence
 
 
     def remember(self, role, message):
@@ -97,7 +100,15 @@ class ChatBot:
             return response
         
         #Use NLP to predict best intent
-        intent_tag = self.predict_intent(user_input)
+        user_input = re.sub(r"[^a-zA-Z0-9\s]", "", user_input.lower()).strip()
+        intent_tag, confidence = self.predict_intent(user_input)
+        print(f"[DEBUG] Predicted: {intent_tag} with confidence {confidence}")
+
+        if confidence < 0.2:
+            response = "I'm not sure I understand. Can you rephrase?"
+            self.remember("bot", response)
+            return response
+        
         for intent in self.intents:
             if intent["tag"] == intent_tag:
                 response = random.choice(intent["responses"])
